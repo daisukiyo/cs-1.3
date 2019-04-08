@@ -27,7 +27,7 @@ def factorial_iterative(n):
         f = f*n
         #  decrement the multiplicand until it reaches the multiplier (1) and repeat
         n = n-1
-    # return f (factorial)
+    #  return f (factorial)
     return f
 
 
@@ -53,5 +53,5 @@ def main():
 
 
 if __name__ == '__main__':
-    # main()
-    print(factorial_iterative(3))
+    main()
+    
