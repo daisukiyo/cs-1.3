@@ -5,3 +5,5 @@ Travis-CI-Setup.md
 /Lessons/assets
 /Lessons/slides
 /Lessons/Class*
+*.pyc 
+.pytest_cache/
