@@ -18,7 +18,7 @@ def linear_search_iterative(array, item):
 
 def linear_search_recursive(array, item, index=0):
     # TODO: implement linear search recursively here
-
+    
     #  check if index is out of bound
     if index >= len(array):
         return None
@@ -73,12 +73,12 @@ def binary_search_iterative(array, item):
     # to verify that your iterative implementation passes all tests
 
 
-def binary_search_recursive(array, item, left=None, right=None):
+def binary_search_recursive(array, item, left=0, right=None):
     # TODO: implement binary search recursively here
 
     #  initialize the lower and upper bound for the array
-    if left == None: 
-        left = 0
+    # if left == None: 
+    #     left = 0
     if right == None:
         right = len(array) -1
     
