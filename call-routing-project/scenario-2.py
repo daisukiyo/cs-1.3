@@ -28,31 +28,45 @@ import re
 pattern = re.compile(r"(\+[\d]+),([\d.]+)")
 group  = pattern.search(open('misc/route-test.txt', 'r').read())
 
-dict_of_routes = {}
-
-for line in open('misc/route-test.txt', 'r'):
-    group  = pattern.search(line)
-    route_key = group.group(1)
-    route_cost = float(group.group(2))
-
-    dict_of_routes[route_key] = route_cost
-
-    # if not dict_of_routes[route_key]:
-    #     dict_of_routes[route_key] = route_cost
-    # elif dict_of_routes[route_key] < route_cost:
-    #     dict_of_routes[route_key] = route_cost
-
-print(dict_of_routes)
-
 # convert the text files that contain the numbers and routes into a list
 def read_list(filename):
     return [line.strip() for line in open(filename)]
 
 # create a list of phone numbers
-phone_numbers = read_list('misc/phone-test.txt')
+phone_numbers = read_list('misc/phone-numbers-10000.txt')
 
 # create a list of routes
-routes = read_list('misc/route-test.txt')
+routes = read_list('misc/route-costs-1000000.txt')
 
-def route_cost_to_check(phone_numbers, routes):
-    pass
+dict_of_routes = {}
+
+for line in routes:
+    group  = pattern.search(line)
+    route_key = group.group(1)
+    route_cost = float(group.group(2))
+    if route_key not in dict_of_routes:
+        dict_of_routes[route_key] = route_cost
+    elif dict_of_routes[route_key] > route_cost:
+        dict_of_routes[route_key] = route_cost
+# print("Dictionary:\n")
+# print(dict_of_routes)
+
+
+
+
+def route_cost_to_check(number, routes):
+    
+    # for number in phone_numbers:
+    cut_num = number
+    while cut_num not in dict_of_routes and len(cut_num) > 1:
+        cut_num = cut_num[:-1]
+    
+    if cut_num == '+':
+        return print(f"{number},{0.00}")
+    else:
+        return print(f"{number},{dict_of_routes[cut_num]}")
+
+for number in phone_numbers:
+    route_cost_to_check(number, routes)
+
+# route_cost_to_check(phone_numbers, routes)
