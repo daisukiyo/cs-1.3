@@ -24,6 +24,26 @@
 # 3. Return as tuple? (Array of tuples w/ Binary Search)
 # 4. Build a tree, w/ 10 Nodes (0-9) -- Each node points to an array with another more nodes
 
+import re
+pattern = re.compile(r"(\+[\d]+),([\d.]+)")
+group  = pattern.search(open('misc/route-test.txt', 'r').read())
+
+dict_of_routes = {}
+
+for line in open('misc/route-test.txt', 'r'):
+    group  = pattern.search(line)
+    route_key = group.group(1)
+    route_cost = float(group.group(2))
+
+    dict_of_routes[route_key] = route_cost
+
+    # if not dict_of_routes[route_key]:
+    #     dict_of_routes[route_key] = route_cost
+    # elif dict_of_routes[route_key] < route_cost:
+    #     dict_of_routes[route_key] = route_cost
+
+print(dict_of_routes)
+
 # convert the text files that contain the numbers and routes into a list
 def read_list(filename):
     return [line.strip() for line in open(filename)]
@@ -34,47 +54,5 @@ phone_numbers = read_list('misc/phone-test.txt')
 # create a list of routes
 routes = read_list('misc/route-test.txt')
 
-# create a list for the final output
-cost_lookup = []
-
-costs = []
-
 def route_cost_to_check(phone_numbers, routes):
-    for number in phone_numbers:
-        # create variable to keep track of phones w/ matching routes
-        print(number)
-        reduced_number = number
-        for route in routes:
-            print(route)
-   
-            while reduced_number not in route and len(reduced_number) > 1:
-                # print(reduced_number)
-                reduced_number = reduced_number[:-1]
-
-            if len(reduced_number) != 0:
-                # costs.append(route)
-
-                # print(reduced_number)
-                # print(route[-5:])
-                match_with_cost = (number + route[-5:])
-
-                cost_lookup.append(match_with_cost)
-                # number += route[-5:]
-                # cost_lookup.append(number)
-
-            else:
-                continue
-    
-    # print(cost_lookup)
-
-# route_cost_to_check(phone_numbers, routes)
-
-def kms(phone_numbers, routes):
-    for number in phone_numbers:
-        for route in routes:
-            while number not in route and len(number) != 2:
-                number = number[:-1]
-            
-            print(number)
-                
-kms(phone_numbers, routes)
+    pass
