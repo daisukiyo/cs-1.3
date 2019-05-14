@@ -43,7 +43,7 @@ dict_of_routes = {}
 for line in routes:
     group  = pattern.search(line)
     route_key = group.group(1)
-    route_cost = float(group.group(2))
+    route_cost = group.group(2)
     if route_key not in dict_of_routes:
         dict_of_routes[route_key] = route_cost
     elif dict_of_routes[route_key] > route_cost:
