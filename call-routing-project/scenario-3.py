@@ -4,20 +4,15 @@ import re
 
 PATTERN = re.compile(r"(\+[\d]+),([\d.]+)")
 
-class Parser(object):
-    def __init__(self):
+def text_to_list(self, text):
+    return [line.strip() for line in open(text)]
 
-        pass
+def _parse_routes(self, routes_file):
+    for line in self.text_to_list(routes_file):
+        match = PATTERN.search(line)
+        number = match.group(1)
+        price = match.group(2)
     
-    def text_to_list(self, text):
-        return [line.strip() for line in open(text)]
-    
-    def _parse_routes(self, routes_file):
-        for line in self.text_to_list(routes_file):
-            match = PATTERN.search(line)
-            number = match.group(1)
-            price = match.group(2)
-        
 
 
 class TrieNode(object):
