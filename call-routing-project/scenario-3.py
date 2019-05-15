@@ -161,7 +161,7 @@ if __name__ == "__main__":
         numbers.extend(text_to_list(p))
     
     # Log results
-    result = open('results.txt', 'w+')
+    result = open('scenario-3-results.txt', 'w+')
     for n in numbers:
         res = trie.find_price(n)
         result.write(f'{res[0]}, {res[1]}\n')
