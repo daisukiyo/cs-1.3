@@ -21,6 +21,7 @@ def parse_routes(routes_file):
 
 class TrieNode(object):
     def __init__(self):
+        '''Initializes trie node object'''
         self.children = {}
         # Price doubles as flag for end of a pattern
         self.price = None
@@ -57,7 +58,7 @@ class TrieNode(object):
 
 
 class RouterTrie(object):
-    def __init__(self, numbers_file='', costs_file=''):
+    def __init__(self):
         ''' Initialize decimal trie'''
         self.root = TrieNode()
         self.size = 0
@@ -80,21 +81,23 @@ class RouterTrie(object):
     def find_price(self, number):
         '''Returns the price of a call to a given phone number'''
         node = self.root
-        
+
         # Iterate through characters in a phone number
         for elem in number:
             # Break if number not in trie
             if elem not in node.children:
-                return 0
+                break
             # Move down trie as you read right on number
             node = node.children[elem]
         
-        # Return price if it exists
-        if node.price:
-            return node.price
-        return 0
+        # Return price if it exists...
+        if node.price is not None:
+            return number, node.price
+        # ...or 0 if it doesn't
+        else:
+            return number, 0
     
-    def insert(self, number, price):
+    def insert(self, number, new_price):
         '''Inserts a price to a call if there is none or if the new price is
         cheaper than the existing price.'''
         node = self.root
@@ -104,28 +107,80 @@ class RouterTrie(object):
             # Create nodes for characters if not there
             if elem not in node.children:
                 node.children[elem] = TrieNode()
+                self.size += 1
             # Move down trie as you read right on number
             node = node.children[elem]
         
-        # Set price at end of the number if not there...
-        if not node.price:
-            node.price = price
+        # Set price at end of the number if not there
         # or if the new price is smaller
-        elif node.price > price:
-            node.price = price
+        if node.price is None or new_price < node.price:
+            node.price = new_price
     
 
 if __name__ == "__main__":
-    # import sys
-    # args = sys.argv[1:]
+    import sys
+    import time
+    import resource
+    import platform
+    
+    args = sys.argv[1:]
+    
+    routes = []
+    files = ('route-costs-10.txt',
+        'route-costs-100.txt',
+        'route-costs-600.txt',
+        'route-costs-35000.txt',
+        'route-costs-106000.txt',
+        'route-costs-1000000.txt',
+        'route-costs-10000000.txt')
+    
+    # Parse all files
+    for f in files:
+        routes.extend(parse_routes(f))
+    
+    # Start timer
+    current = time.perf_counter()
+    trie = RouterTrie()
 
-    # text = parse_routes(args[0])
-    # print(list(text))
-    #============NODE CLASS============#
-    node = TrieNode()
-    children = ['0', '1', '2', '3']
-    for c in children:
-        node.children[c] = TrieNode()
-    print(node.is_leaf())
-    print(node.children)
-    print(node.height())
+    # Populate trie
+    for num, cost in routes:
+        trie.insert(num, cost)
+    
+    # How long did it take to build?
+    print(f'Buildtime: {time.perf_counter() - current}')
+
+    phone_numbers = ('phone-numbers-3.txt',
+        'phone-numbers-10.txt',
+        'phone-numbers-100.txt',
+        'phone-numbers-1000.txt',
+        'phone-numbers-10000.txt')
+    
+    # Parse phone numbers
+    numbers = []
+    for p in phone_numbers:
+        numbers.extend(text_to_list(p))
+    
+    # Log results
+    result = open('results.txt', 'w+')
+    for n in numbers:
+        res = trie.find_price(n)
+        result.write(f'{res[0]}, {res[1]}\n')
+    result.close()
+
+    #========================EDWIN'S CODE========================#
+    # get memory usage
+    usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+
+    # linux returns kb and macOS returns bytes,
+    # here we convert both to mb
+    if platform.system() == 'Linux':
+        # convert kb to mb and round to 2 digits
+        usage = round(usage/float(1 << 10), 2)
+    else:
+        # convert bytes to mb and round to 2 digits
+        usage = round(usage/float(1 << 20), 2)
+        
+    # print memory usage
+    print("Memory Usage: {} mb.".format(usage))
+    #============================================================#
+    print(f'Trie Size: {trie.size}')
