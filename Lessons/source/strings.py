@@ -17,7 +17,7 @@ def find_index(text, pattern):
     or None if not found."" "
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_index here (iteratively and/or recursively)
+    # TODO: Implement find_index here (iteratively and/or recursively)"""
 
     # return "0" when no pattern is found
     if pattern == "":
@@ -54,25 +54,35 @@ def find_all_indexes(text, pattern):
 
     if pattern == "":
         return list(range(len(text)))
-
+    
+    # using find index to obtain the index of the first occurance
     index = find_index(text, pattern)
 
+    # create a list of all the indicies
     start_indexes = []
 
+
     if index != None:
+        # append each indice to the list
         start_indexes.append(index)
 
+        # initialize reference points
         index = index + 1
         start = index
         sub_index = 0
 
         while index <= len(text) - 1:
+            # using the reference poitns initialized above
+            # traverse the chunk of text over 1 index at a time
+            # checking everytime a pattern potentially matches
             if text[index] == pattern[sub_index]:
                 index += 1
                 sub_index += 1
 
+                # if you reach the end of the pattern, its a match
                 if sub_index == len(pattern):
                     start_indexes.append(start)
+                    # restart search pattern
                     sub_index = 0
                     start += 1
                     index = start

@@ -82,6 +82,7 @@ def binary_search_recursive(array, item, left=0, right=None):
     if right == None:
         right = len(array) -1
     
+    
     #  check edge case where array is non-existent (lower bound cannot be greater than upper bound)
     if left > right:
         return None

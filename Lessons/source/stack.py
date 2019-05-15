@@ -31,13 +31,14 @@ class LinkedStack(object):
 
     def push(self, item):
         """Insert the given item on the top of this stack.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) – this is b/c the append method is called from LL Class [TODO]"""
         # TODO: Push given item
         return self.list.append(item)
 
     def peek(self):
         """Return the item on the top of this stack without removing it,
-        or None if this stack is empty."""
+        or None if this stack is empty.
+        Running time: O(1) – Instantaneous lookup of an LL head"""
         # TODO: Return top item, if any
         if self.is_empty(): 
             return None
@@ -47,7 +48,7 @@ class LinkedStack(object):
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(N) -- traverse to tail of the LL"""
         # TODO: Remove and return top item, if any
         if self.is_empty():
             raise ValueError('stack is empty -- no items to remove/return')
@@ -87,13 +88,14 @@ class ArrayStack(object):
 
     def push(self, item):
         """Insert the given item on the top of this stack.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1 *average) – append item after index n-1 unless hit array capacity[TODO]"""
         # TODO: Insert given item
         return self.list.append(item)
 
     def peek(self):
         """Return the item on the top of this stack without removing it,
-        or None if this stack is empty."""
+        or None if this stack is empty.
+        Running time: O(1) - get item from index n-1 (array lookup is instant given an index)"""
         # TODO: Return top item, if any
         if self.is_empty():
             return None
@@ -103,7 +105,7 @@ class ArrayStack(object):
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) – delete item from index n-1 (instant delete index at end w.o shifting of an array) [TODO]"""
         # TODO: Remove and return top item, if any
         if not self.list:
             raise ValueError('stack is empty -- no items to remove/return')

@@ -16,7 +16,7 @@ class Sets(object):
 
     def size(self):
         # property that tracks the number of elements in constant time
-        return self.set_struct.size()
+        return self.set_struct.size
 
     def contains(self, element):
         # return a boolean indicating whether element is in this set
@@ -57,7 +57,7 @@ class Sets(object):
             larger_set = self
             smaller_set = other_set
 
-        for item in smaller_set.hash_set.keys():
+        for item in smaller_set.set_struct.keys():
             if larger_set.contains(item):
                 intersection.add(item)
 
