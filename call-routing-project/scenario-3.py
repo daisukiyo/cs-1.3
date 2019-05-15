@@ -126,13 +126,13 @@ if __name__ == "__main__":
     args = sys.argv[1:]
     
     routes = []
-    files = ('route-costs-10.txt',
-        'route-costs-100.txt',
-        'route-costs-600.txt',
-        'route-costs-35000.txt',
-        'route-costs-106000.txt',
-        'route-costs-1000000.txt',
-        'route-costs-10000000.txt')
+    files = ('misc/route-costs-10.txt',
+        'misc/route-costs-100.txt',
+        'misc/route-costs-600.txt',
+        'misc/route-costs-35000.txt',
+        'misc/route-costs-106000.txt',
+        'misc/route-costs-1000000.txt',
+        'misc/route-costs-10000000.txt')
     
     # Parse all files
     for f in files:
@@ -149,11 +149,11 @@ if __name__ == "__main__":
     # How long did it take to build?
     print(f'Buildtime: {time.perf_counter() - current}')
 
-    phone_numbers = ('phone-numbers-3.txt',
-        'phone-numbers-10.txt',
-        'phone-numbers-100.txt',
-        'phone-numbers-1000.txt',
-        'phone-numbers-10000.txt')
+    phone_numbers = ('misc/phone-numbers-3.txt',
+        'misc/phone-numbers-10.txt',
+        'misc/phone-numbers-100.txt',
+        'misc/phone-numbers-1000.txt',
+        'misc/phone-numbers-10000.txt')
     
     # Parse phone numbers
     numbers = []
