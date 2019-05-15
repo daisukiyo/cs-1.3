@@ -80,6 +80,7 @@ class RouterTrie(object):
     def find_price(self, number):
         '''Returns the price of a call to a given phone number'''
         node = self.root
+        
         # Iterate through characters in a phone number
         for elem in number:
             # Break if number not in trie
@@ -87,6 +88,7 @@ class RouterTrie(object):
                 return 0
             # Move down trie as you read right on number
             node = node.children[elem]
+        
         # Return price if it exists
         if node.price:
             return node.price
@@ -96,6 +98,7 @@ class RouterTrie(object):
         '''Inserts a price to a call if there is none or if the new price is
         cheaper than the existing price.'''
         node = self.root
+
         # Iterate through characters in phone number
         for elem in number:
             # Create nodes for characters if not there
@@ -103,10 +106,11 @@ class RouterTrie(object):
                 node.children[elem] = TrieNode()
             # Move down trie as you read right on number
             node = node.children[elem]
-        # Set price at end of the number if not there
+        
+        # Set price at end of the number if not there...
         if not node.price:
             node.price = price
-        # Or if the new price is smaller
+        # or if the new price is smaller
         elif node.price > price:
             node.price = price
     
