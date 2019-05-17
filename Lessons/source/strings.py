@@ -1,11 +1,11 @@
 #!python
 
 def contains(text, pattern):
-    """Return a boolean indicating whether pattern occurs in text."""
+    """Return a boolean indicating whether pattern occurs in text.
+    O(n) runtime"""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     
-    # if 
     pattern_index = find_index(text, pattern)
 
     if pattern_index != None:
@@ -17,7 +17,8 @@ def find_index(text, pattern):
     or None if not found."" "
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_index here (iteratively and/or recursively)"""
+    # TODO: Implement find_index here (iteratively and/or recursively)
+    O(n) where n is the index where the last pattern is in the string"""
 
     # return "0" when no pattern is found
     if pattern == "":
@@ -47,7 +48,8 @@ def find_index(text, pattern):
 
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
-    or an empty list if not found."""
+    or an empty list if not found.
+    O(n) where n is the number of letters in the text"""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement find_all_indexes here (iteratively and/or recursively)
@@ -60,7 +62,6 @@ def find_all_indexes(text, pattern):
 
     # create a list of all the indicies
     start_indexes = []
-
 
     if index != None:
         # append each indice to the list
