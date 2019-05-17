@@ -1,3 +1,4 @@
+.DS_Store
 /project
 /travis-assets
 Setup.md
@@ -7,3 +8,4 @@ Travis-CI-Setup.md
 /Lessons/Class*
 *.pyc 
 .pytest_cache/
+/call-routing-project/misc/*

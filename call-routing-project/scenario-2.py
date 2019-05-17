@@ -71,7 +71,7 @@ def read_list(filename):
 phone_numbers = read_list('misc/phone-numbers-10000.txt')
 
 # create a list of routes
-routes_list = read_list('misc/route-costs-1000000.txt')
+routes_list = read_list('misc/route-costs-10000000.txt')
 
 dict_of_routes = {}
 
@@ -84,8 +84,9 @@ populate_dictionary(routes_list)
 # Returns runtime in (seconds)
 print(f'Buildtime: {time.perf_counter() - current}')
 
+print("Results Recorded: 'scenario-2-results.txt'")
 # outputs the results into a textfile
-result = open('scenario-2-results.txt', 'w+')
+result = open('scenario-2-results.txt', 'w')
 for number in phone_numbers:
     result.write(route_cost_to_check(number, routes_list))
 result.close()
